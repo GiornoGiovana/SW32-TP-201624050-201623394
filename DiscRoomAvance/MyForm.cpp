@@ -1,10 +1,14 @@
 #include "MyForm.h"
+using namespace System;
+using namespace System::Windows::Forms;
 
-using namespace Project12;
+[STAThread]
 
-int main() {
+void main(array<String^>^arg) {
+	Application::EnableVisualStyles();
+	Application::SetCompatibleTextRenderingDefault(false);
+	Application::Run(gcnew Project11::MyForm());
 
-	Application::Run(gcnew MyForm);
-
-	return 0;
 }
+
+
