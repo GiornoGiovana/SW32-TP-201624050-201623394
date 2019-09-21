@@ -136,8 +136,13 @@
     <ClCompile Include="MyForm.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CBalas.h" />
     <ClInclude Include="CDiscoA.h" />
+    <ClInclude Include="CDiscoB.h" />
     <ClInclude Include="CGame.h" />
+    <ClInclude Include="CListBalas.h" />
+    <ClInclude Include="CListDiscA.h" />
+    <ClInclude Include="CListDiscB.h" />
     <ClInclude Include="CPersonaje.h" />
     <ClInclude Include="CProtagonista.h" />
     <ClInclude Include="List.h" />

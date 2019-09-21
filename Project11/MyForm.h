@@ -15,6 +15,11 @@ namespace Project11 {
 		Bitmap^ prota;
 		Bitmap^ mapa;
 		Bitmap^ discoA;
+		Bitmap^ discoB;
+		Bitmap^ bala1;
+		Bitmap^ bala2;
+		Bitmap^ bala3;
+		Bitmap^ bala4;
 	private: System::Windows::Forms::Timer^  ZaWarudo;
 			 BufferedGraphics^ buffer;
 	public:
@@ -24,6 +29,11 @@ namespace Project11 {
 			this->prota = gcnew Bitmap("Imagenes\\protagonista.png");
 			this->mapa = gcnew Bitmap("Imagenes\\escenario.jpg");
 			this->discoA = gcnew Bitmap("Imagenes\\discoA.png");
+			this->discoB = gcnew Bitmap("Imagenes\\discoB.png");
+			this->bala1 = gcnew Bitmap("Imagenes\\Bala1.png");
+			this->bala2 = gcnew Bitmap("Imagenes\\Bala2.png");
+			this->bala3 = gcnew Bitmap("Imagenes\\Bala3.png");
+			this->bala4 = gcnew Bitmap("Imagenes\\Bala4.png");
 			this->buffer = BufferedGraphicsManager::Current->Allocate(this->CreateGraphics(), this->ClientRectangle);
 			this->juegito = new CGame();
 		}
@@ -71,8 +81,8 @@ namespace Project11 {
 
 	private: System::Void StarPlatinum(System::Object^  sender, System::EventArgs^  e) {
 		this->buffer->Graphics->DrawImage(this->mapa, this->ClientRectangle);
-		this->juegito->dibujarProta(this->prota, this->buffer);
-		this->juegito->animarDiscoA(this->discoA, this->buffer, this->ClientSize);
+		this->juegito->dibujarBalas(this->bala1, this->bala2, this->bala3, this->bala4, this->buffer);
+		this->juegito->jugar(this->discoA, this->discoB, this->prota, this->buffer, this->Size);
 		this->buffer->Render();
 	}
 	private: System::Void teclita(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
@@ -81,6 +91,8 @@ namespace Project11 {
 		case Keys::Down:this->juegito->animarProta(this->ClientSize, 80); break;
 		case Keys::Left:this->juegito->animarProta(this->ClientSize, 75); break;
 		case Keys::Right:this->juegito->animarProta(this->ClientSize, 77); break;
+		case Keys::Space:this->juegito->disparar(this->buffer); break;
+		case Keys::Enter:this->juegito->agregarDiscB(); break;
 		}
 	}
 	};

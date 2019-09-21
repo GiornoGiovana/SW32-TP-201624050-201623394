@@ -17,12 +17,17 @@ public:
 		this->indiceY = 0;
 	}
 	~CPersonaje(){}
-
+	void setPosition(short x, short y) {
+		this->areaDibujo.X = x;
+		this->areaDibujo.Y = y;
+	}
 	void dibujar(Bitmap^ imagen, BufferedGraphics^ buffer) {
 		this->ancho = imagen->Width / this->nImagenesX;
 		this->alto = imagen->Height / this->nImagenesY;
 		this->x = indiceX * ancho;
 		this->y = indiceY * alto;
+		Color color = imagen->GetPixel(0, 0);
+		imagen->MakeTransparent(color);
 		Rectangle areaRecorte = Rectangle(this->x, this->y, this->ancho, this->alto);
 		buffer->Graphics->DrawImage(imagen, this->areaDibujo, areaRecorte, GraphicsUnit::Pixel);
 	}

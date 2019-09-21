@@ -24,13 +24,13 @@ public:
 		++len;
 	}
 	void pop() {
-		if (!isEmpry()) {
+		if (!isEmpty()) {
 			Node* aux = top;
 			top = top->next;
 			delete aux;
 		}
 	}
-	uint size() { return len; }
-	bool isEmpry() { return len == 0; }
 	T _top() { return top->elem; }
+	uint size() { return len; }
+	bool isEmpty() { return len == 0; }
 };

@@ -46,6 +46,7 @@ public:
 			Node* aux = head;
 			head = head->next;
 			delete aux;
+			--len;
 		} else if (pos > 0 && pos < len) {
 			Node* aux = head;
 			for (short i = 0; i < pos - 1; i++) {
@@ -62,8 +63,8 @@ public:
 	void pop_back() {
 		removePosition(len - 1);
 	}
-	T at(uint i) {
-		if (i >= 0 && i < len) {
+	T at(uint pos) {
+		if (pos >= 0 && pos < len) {
 			Node* aux = head;
 			for (short i = 0; i < pos; ++i) {
 				aux = aux->next;
