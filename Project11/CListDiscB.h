@@ -15,6 +15,9 @@ public:
 		}
 		delete listB;
 	}
+	CDiscoB* at(uint pos) {
+		return this->listB->at(pos);
+	}
 	void animarDiscos(Bitmap^ imagen, BufferedGraphics^ buffer, Size limite) {
 		for (short i = 0; i < this->listB->size(); i++) {
 			CDiscoB* disc = listB->at(i);

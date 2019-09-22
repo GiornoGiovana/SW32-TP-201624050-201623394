@@ -21,6 +21,15 @@ public:
 			disc->animarDiscoA(imagen, buffer, limite);
 		}
 	}
+	short getPosicionX(uint i) {
+		return this->listA->at(i)->getX();
+	}
+	short getPosicionY(uint i) {
+		return this->listA->at(i)->getY();
+	}
+	CDiscoA* at(uint pos) {
+		return this->listA->at(pos);
+	}
 	void agregarDisco() {
 		Random r;
 		short x = r.Next(0, 450);

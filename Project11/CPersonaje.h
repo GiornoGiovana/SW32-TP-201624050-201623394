@@ -17,6 +17,8 @@ public:
 		this->indiceY = 0;
 	}
 	~CPersonaje(){}
+	int getX() { return this->areaDibujo.X; }
+	int getY() { return this->areaDibujo.Y; }
 	void setPosition(short x, short y) {
 		this->areaDibujo.X = x;
 		this->areaDibujo.Y = y;

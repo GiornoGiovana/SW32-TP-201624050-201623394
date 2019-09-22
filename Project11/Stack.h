@@ -1,19 +1,20 @@
 #pragma once
-typedef unsigned int uint;
-template <typename T>
 
+template <typename T>
 class Stack {
 	struct Node {
 		T elem;
-		Node* next;
-		Node(T elem, Node* next = nullptr){}
+		Node*   next;
+
+		Node(T elem, Node* next = nullptr) : elem(elem), next(next) {}
 	};
+
 	Node* top;
-	uint len;
+	int len;
 public:
-	Stack():top(nullptr), len(0){}
+	Stack() : top(nullptr), len(0) {}
 	~Stack() {
-		while (top = nullptr) {
+		while (top != nullptr) {
 			Node* aux = top;
 			top = top->next;
 			delete aux;
@@ -24,13 +25,20 @@ public:
 		++len;
 	}
 	void pop() {
-		if (!isEmpty()) {
+		if (!is_empty()) {
 			Node* aux = top;
 			top = top->next;
 			delete aux;
+			--len;
 		}
 	}
-	T _top() { return top->elem; }
-	uint size() { return len; }
-	bool isEmpty() { return len == 0; }
+	T _top() {
+		if (!is_empty()) {
+			return top->elem;
+		}
+		return 0;
+	}
+	bool is_empty() { return top == nullptr; }
+	int size() { return len; }
+
 };
