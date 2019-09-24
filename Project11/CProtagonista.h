@@ -11,6 +11,7 @@ public:
 	void moverProta(Bitmap^ image, BufferedGraphics^ buffer) {
 		CPersonaje::dibujar(image, buffer);
 	}
+	void setSpeed(short _d) { this->dx = _d; this->dy = _d; }
 	void animar(Size limite, int tecla)  {
 		switch (Direcciones(tecla))
 		{

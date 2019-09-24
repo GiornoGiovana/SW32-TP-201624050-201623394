@@ -17,7 +17,9 @@ namespace Project11 {
 		Bitmap^ discoA;
 		Bitmap^ discoB;
 		Bitmap^ discoX;
-		Bitmap^ cmdStar;
+		Bitmap^ hon1;
+		Bitmap^ hon2;
+		Bitmap^ hon3;
 	private: System::Windows::Forms::Timer^  ZaWarudo;
 			 BufferedGraphics^ buffer;
 	public:
@@ -29,7 +31,9 @@ namespace Project11 {
 			this->discoA = gcnew Bitmap("Imagenes\\discoA.png");
 			this->discoB = gcnew Bitmap("Imagenes\\discoB.png");
 			this->discoX = gcnew Bitmap("Imagenes\\discoX.png");
-			this->cmdStar = gcnew Bitmap("Imagenes\\Hongo.png");
+			this->hon1 = gcnew Bitmap("Imagenes\\hon1.png");
+			this->hon2 = gcnew Bitmap("Imagenes\\hon2.png");
+			this->hon3 = gcnew Bitmap("Imagenes\\hon3.png");
 			this->buffer = BufferedGraphicsManager::Current->Allocate(this->CreateGraphics(), this->ClientRectangle);
 			this->juegito = new CGame();
 		}
@@ -77,7 +81,7 @@ namespace Project11 {
 
 	private: System::Void StarPlatinum(System::Object^  sender, System::EventArgs^  e) {
 		this->buffer->Graphics->DrawImage(this->mapa, this->ClientRectangle);
-		this->juegito->jugar(this->discoA, this->discoB, this->discoX, this->cmdStar, this->prota, this->buffer, this->Size);
+		this->juegito->jugar(this->discoA, this->discoB, this->discoX, this->hon1, this->hon2, this->hon3, this->prota, this->buffer, this->Size);
 		this->buffer->Render();
 	}
 	private: System::Void teclita(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
@@ -88,6 +92,7 @@ namespace Project11 {
 		case Keys::Right:this->juegito->animarProta(this->ClientSize, 77); break;
 		case Keys::Space:this->juegito->agregarDiscA(); break;
 		case Keys::Enter:this->juegito->agregarDiscB(); break;
+		case Keys::A:this->juegito->setBotton(1); break;
 		}
 	}
 	};
