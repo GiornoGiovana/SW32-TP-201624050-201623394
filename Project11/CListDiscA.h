@@ -15,6 +15,10 @@ public:
 		}
 		delete listA;
 	}
+	void agregarDisco() {
+		CDiscoA* discA = new CDiscoA(f(0, 450), f(0, 500));
+		this->listA->push_back(discA);
+	}
 	void animarDiscos(Bitmap^ imagen, BufferedGraphics^ buffer, Size limite) {
 		for (short i = 0; i < this->listA->size(); i++) {
 			CDiscoA* disc = listA->at(i);
@@ -30,13 +34,7 @@ public:
 	CDiscoA* at(uint pos) {
 		return this->listA->at(pos);
 	}
-	void agregarDisco() {
-		Random r;
-		short x = r.Next(0, 450);
-		short y = r.Next(0, 500);
-		CDiscoA* discA = new CDiscoA(x, y);
-		this->listA->push_back(discA);
-	}
+
 	void eliminarDisco(uint pos) {
 		this->listA->removePosition(pos);
 	}

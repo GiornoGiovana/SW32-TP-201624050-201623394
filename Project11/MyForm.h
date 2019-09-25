@@ -93,6 +93,7 @@ namespace Project11 {
 		case Keys::Space:this->juegito->agregarDiscA(); break;
 		case Keys::Enter:this->juegito->agregarDiscB(); break;
 		case Keys::A:this->juegito->setBotton(1); break;
+		case Keys::Escape:this->Close(); break;
 		}
 	}
 	};

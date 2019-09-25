@@ -1,12 +1,12 @@
 #pragma once
-#include <vector>
 #include"CProtagonista.h"
 #include "CListDiscA.h"
 #include "CListDiscB.h"
 #include "CListDiscX.h"
 #include "CStackX.h"
 #include "CComodin.h"
-using namespace std;
+
+
 class CGame {
 	CProtagonista* prota;
 	CListDiscB* lstB;
@@ -52,7 +52,6 @@ public:
 		this->lstB->agregarDisco();
 	}
 	void choqueDiscos(Bitmap^ imgX, BufferedGraphics^ buffer, Size limite) {
-		Random r;
 		int pos = 0;
 		for (short i = 0; i < this->lstA->size(); i++) {
 			for(short j = 0; j < this->lstB->size(); j++) {
@@ -71,9 +70,9 @@ public:
 		this->prota->animar(limite, tecla);
 	}
 	void agregarStar() {
-		this->c1 = new Hongo1(Rectangle(50, 50, 40, 40));
-		this->c2 = new Hongo2(Rectangle(397, 300, 40, 40));
-		this->c3 = new Hongo3(Rectangle(200, 400, 40, 40));
+		this->c1 = new Hongo1(Rectangle(f(50, 100), f(50, 300), 60, 50));
+		this->c2 = new Hongo2(Rectangle(f(350, 400), f(25, 100), 70, 60));
+		this->c3 = new Hongo3(Rectangle(f(264, 480), f(222, 400), 40, 40));
 	}
 	void animarStar(Bitmap^ hon1, Bitmap^ hon2, Bitmap^ hon3, BufferedGraphics^ buffer) {
 		if(c1) this->c1->dibujarComodin(hon1, buffer);

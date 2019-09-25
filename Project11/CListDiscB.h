@@ -25,10 +25,7 @@ public:
 		}
 	}
 	void agregarDisco() {
-		Random r;
-		short x = r.Next(0, 450);
-		short y = r.Next(0, 500);
-		CDiscoB* discB = new CDiscoB(x, y);
+		CDiscoB* discB = new CDiscoB(f(0, 450), f(0, 500));
 		this->listB->push_back(discB);
 	}
 	void eliminarDisco(uint pos) {
