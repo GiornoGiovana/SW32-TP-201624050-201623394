@@ -25,6 +25,7 @@ public:
 		}
 	}
 	void agregarDisco() {
+		Random r;
 		CDiscoB* discB = new CDiscoB(f(0, 450), f(0, 500));
 		this->listB->push_back(discB);
 	}

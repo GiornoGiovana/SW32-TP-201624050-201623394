@@ -4,7 +4,7 @@
 class CDiscoB : public CPersonaje {
 	short dx, dy;
 public:
-	CDiscoB(short x, short y) : CPersonaje(4, 1, Rectangle(x, y, 50, 50)), dx(15), dy(15) {}
+	CDiscoB(short x, short y) : CPersonaje(4, 1, Rectangle(x, y, 70, 70)), dx(15), dy(15) {}
 	void animarDiscoA(Bitmap^ imagen, BufferedGraphics^ buffer, Size limite) {
 		CPersonaje::dibujar(imagen, buffer);
 		this->indiceX = (this->indiceX == nImagenesX - 1) ? 0 : this->indiceX + 1;

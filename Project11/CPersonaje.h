@@ -2,12 +2,10 @@
 #include <cstdlib>
 #include <ctime>
 #include <functional>
-
 using namespace System;
 using namespace System::Drawing;
 using namespace std;
 function<short(short, short)>f = [](short limInf, short limiSup) { return rand() % (limiSup - limInf + 1) + limInf; };
-
 class CPersonaje {
 protected:
 	Rectangle areaDibujo;

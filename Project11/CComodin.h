@@ -25,25 +25,20 @@ class Hongo1 : public CComodin {
 public:
 	Hongo1(Rectangle a) : CComodin(a){}
 	void Skill(CProtagonista* prota)override {
-		prota->setSpeed(30);
+		prota->setSpeed(15);
 	}
 };
 class Hongo2 : public CComodin {
 public:
 	Hongo2(Rectangle a): CComodin(a){}
 	void Skill(CProtagonista* prota)override {
-		prota->setSpeed(5);
+		prota->setSpeed(1);
 	}
 };
 class Hongo3 : public CComodin {
 public:
 	Hongo3(Rectangle a) : CComodin(a){}
 	void Skill(CProtagonista* prota)override {
-		prota->setSpeed(15);
+		prota->setSpeed(35);
 	}
 };
-
-/*
-	void setArea(short x, short y, Rectangle a) { this->area.X = x; this->area.Y = y; this->area = a; }
-	Rectangle getArea() { return this->area; }
-*/

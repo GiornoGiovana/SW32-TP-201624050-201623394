@@ -8,9 +8,12 @@ namespace Project11 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Diagnostics;
 
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
+		Stopwatch^ cronometro;
+		BufferedGraphics^ buffer;
 		CGame* juegito;
 		Bitmap^ prota;
 		Bitmap^ mapa;
@@ -20,8 +23,10 @@ namespace Project11 {
 		Bitmap^ hon1;
 		Bitmap^ hon2;
 		Bitmap^ hon3;
+	private: System::Windows::Forms::TextBox^  txtMin;
+	private: System::Windows::Forms::TextBox^  txtMil;
+	private: System::Windows::Forms::TextBox^  txtSeg;
 	private: System::Windows::Forms::Timer^  ZaWarudo;
-			 BufferedGraphics^ buffer;
 	public:
 		MyForm(void)
 		{
@@ -36,6 +41,7 @@ namespace Project11 {
 			this->hon3 = gcnew Bitmap("Imagenes\\hon3.png");
 			this->buffer = BufferedGraphicsManager::Current->Allocate(this->CreateGraphics(), this->ClientRectangle);
 			this->juegito = new CGame();
+			this->cronometro = gcnew Stopwatch;
 		}
 
 	protected:
@@ -59,6 +65,9 @@ namespace Project11 {
 		{
 			this->components = (gcnew System::ComponentModel::Container());
 			this->ZaWarudo = (gcnew System::Windows::Forms::Timer(this->components));
+			this->txtMin = (gcnew System::Windows::Forms::TextBox());
+			this->txtMil = (gcnew System::Windows::Forms::TextBox());
+			this->txtSeg = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
 			// 
 			// ZaWarudo
@@ -66,23 +75,64 @@ namespace Project11 {
 			this->ZaWarudo->Enabled = true;
 			this->ZaWarudo->Tick += gcnew System::EventHandler(this, &MyForm::StarPlatinum);
 			// 
+			// txtMin
+			// 
+			this->txtMin->Enabled = false;
+			this->txtMin->Location = System::Drawing::Point(2, 12);
+			this->txtMin->Name = L"txtMin";
+			this->txtMin->Size = System::Drawing::Size(70, 20);
+			this->txtMin->TabIndex = 0;
+			// 
+			// txtMil
+			// 
+			this->txtMil->Enabled = false;
+			this->txtMil->Location = System::Drawing::Point(154, 12);
+			this->txtMil->Name = L"txtMil";
+			this->txtMil->Size = System::Drawing::Size(70, 20);
+			this->txtMil->TabIndex = 1;
+			// 
+			// txtSeg
+			// 
+			this->txtSeg->Enabled = false;
+			this->txtSeg->Location = System::Drawing::Point(78, 12);
+			this->txtSeg->Name = L"txtSeg";
+			this->txtSeg->Size = System::Drawing::Size(70, 20);
+			this->txtSeg->TabIndex = 2;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(564, 468);
+			this->ClientSize = System::Drawing::Size(700, 600);
+			this->Controls->Add(this->txtSeg);
+			this->Controls->Add(this->txtMil);
+			this->Controls->Add(this->txtMin);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
 			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MyForm::teclita);
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
 
 	private: System::Void StarPlatinum(System::Object^  sender, System::EventArgs^  e) {
+		TimeSpan^ ts = gcnew TimeSpan(0, 0, 0, 0, (int)cronometro->ElapsedMilliseconds);
+		txtMin->Text = ts->Minutes.ToString()->Length < 2 ? "0" + ts->Minutes.ToString() : ts->Minutes.ToString();
+		txtSeg->Text = ts->Seconds.ToString()->Length < 2 ? "0" + ts->Seconds.ToString() : ts->Seconds.ToString();
+		txtMil->Text = ts->Milliseconds.ToString();
+		this->cronometro->Start();
 		this->buffer->Graphics->DrawImage(this->mapa, this->ClientRectangle);
 		this->juegito->jugar(this->discoA, this->discoB, this->discoX, this->hon1, this->hon2, this->hon3, this->prota, this->buffer, this->Size);
 		this->buffer->Render();
+		if (this->juegito->getVidas() == 0 || this->juegito->getPerder()) {
+			this->ZaWarudo->Enabled = false;
+			MessageBox::Show("Perdiste");
+		}
+		if ("01" == txtMin->Text) {
+			this->ZaWarudo->Enabled = false;
+			MessageBox::Show("Ganaste, ella si te ama :')");
+		}
 	}
 	private: System::Void teclita(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
 		switch(e->KeyCode){

@@ -16,6 +16,7 @@ public:
 		delete listA;
 	}
 	void agregarDisco() {
+		Random r;
 		CDiscoA* discA = new CDiscoA(f(0, 450), f(0, 500));
 		this->listA->push_back(discA);
 	}
@@ -24,6 +25,9 @@ public:
 			CDiscoA* disc = listA->at(i);
 			disc->animarDiscoA(imagen, buffer, limite);
 		}
+	}
+	short _find(CDiscoA* otro) {
+		return this->listA->find(otro);
 	}
 	short getPosicionX(uint i) {
 		return this->listA->at(i)->getX();

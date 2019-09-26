@@ -1,7 +1,7 @@
 #pragma once
-
+#include <functional>
 typedef unsigned int uint;
-
+using namespace std;
 template <typename T>
 
 class List {
@@ -13,14 +13,28 @@ class List {
 	};
 	Node* head;
 	uint len;
+	typedef function<bool(T, T)> Comp;
+	Comp compare;
 public:
-	List():head(nullptr), len(0){}
+	List() :head(nullptr), len(0), compare([](T a, T b) {return a == b; }) {}
 	~List() {
 		while (head != nullptr) {
 			Node* aux = head;
 			head = head->next;
 			delete aux;
 		}
+	}
+	short find(T elem) {
+		Node* aux = head;
+		short cont = 0;
+		while (aux != nullptr) {
+			if (compare(aux->elem, elem)) {
+				return cont;
+			}
+			cont++;
+			aux = aux->next;
+		}
+		return -1;
 	}
 	void addPosition(T elem, uint pos) {
 		if (pos == 0) {
